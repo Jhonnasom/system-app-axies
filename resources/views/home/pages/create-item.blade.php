@@ -54,13 +54,13 @@
         </aside>
         <form class="flex-1" action="">
             <div class="flex flex-col gap-y-6">
-                <x-input-label for="img" class="flex flex-col gap-y-5" value="Upload File">
+                <x-input-label for="img" class="flex flex-col gap-y-5 pointer-events-none" value="Upload File">
                     <x-slot name="input">
                         <div
                             class="px-[60px] flex justify-between items-center py-10 border-[1px] border-[#343444] rounded-[8px] text-[14px] text-[#8A8AA0] font-normal">
                             PNG, JPG, GIF, WEBP or MP4. Max 200mb.
                             <div
-                                class="flex justify-center items-center py-4 border-[#FFFFFF] border-[1.5px] font-bold text-white text-[15px] rounded-[56px] px-[40px] cursor-pointer">
+                                class="flex justify-center items-center py-4 border-[#FFFFFF] border-[1.5px] font-bold text-white text-[15px] rounded-[56px] px-[40px] cursor-pointer pointer-events-auto">
                                 Upload Image
                             </div>
                         </div>

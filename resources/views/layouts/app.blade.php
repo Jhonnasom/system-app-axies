@@ -13,14 +13,14 @@
     <title>@yield('title')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-[Urbanist] w-screen max-w-[1920px] overflow-x-hidden">
+<body class="font-[Urbanist] w-screen max-w-[1920px] overflow-x-hidden mx-auto">
 <header>
     <div class="flex w-full py-4 pl-[255px] pr-[268px] bg-[#14141FB2] items-center justify-between border-b-[1px] border-[#8A8AA0]">
         <x-logo/>
         <nav>
             <ul class="flex items-center gap-x-10">
-                <li><a class="font-bold text-white text-[18px]" href="#">Home</a></li>
-                <li><a class="flex gap-x-1.5 items-center font-bold text-white text-[18px]" href="#">Explore <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                <li><a class="font-bold text-white text-[18px]" href="{{route('home') }}">Home</a></li>
+                <li><a class="flex gap-x-1.5 items-center font-bold text-white text-[18px]" href="{{ action([\App\Http\Controllers\MainController::class, 'index']) }}">Explore <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
                             <path d="M4.99997 5.85018C4.82075 5.85018 4.64155 5.78175 4.50492 5.64518L0.205141 1.34536C-0.0683805 1.07184 -0.0683805 0.628372 0.205141 0.354961C0.478553 0.0815495 0.921933 0.0815495 1.19548 0.354961L4.99997 4.15968L8.80449 0.355094C9.07801 0.0816824 9.52135 0.0816824 9.79474 0.355094C10.0684 0.628505 10.0684 1.07197 9.79474 1.3455L5.49503 5.64531C5.35832 5.78191 5.17913 5.85018 4.99997 5.85018Z" fill="white"/>
                         </svg>
                     </a>
@@ -98,29 +98,8 @@
 <footer class="bg-[#0D0D11] pt-[87px] pb-[80px] px-[255px] flex justify-between items-center">
     <div>
         <x-logo class="mb-3"/>
-        <p class="leading-[22px] text-[14px] max-w-[245px] text-white mb-7">Lorem ipsum dolor sit amet,consectetur adipisicing elit. Quis non, fugit totam vel laboriosam vitae.</p>
-        <div class="flex gap-x-3">
-            <button class="rounded-[8px] bg-[#343444] p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M1.00195 12.0631C1.00312 17.0128 4.58036 21.2272 9.43895 22.0029V14.9709H6.90195V12.0631H9.44195V9.84957C9.32841 8.80069 9.68448 7.75534 10.4136 6.99704C11.1427 6.23874 12.1693 5.84608 13.215 5.92556C13.9655 5.93775 14.7141 6.00501 15.455 6.12679V8.60093H14.191C13.7558 8.54358 13.3183 8.68818 13.0017 8.994C12.6851 9.29981 12.5237 9.73374 12.563 10.1735V12.0631H15.334L14.891 14.9719H12.563V22.0029C17.8174 21.1674 21.502 16.3391 20.9475 11.0158C20.3929 5.6925 15.7932 1.73786 10.4808 2.01682C5.16831 2.29578 1.0028 6.71067 1.00195 12.0631Z" fill="white"/>
-                </svg>
-            </button>
-            <button class="rounded-[8px] bg-[#343444] p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M19.6441 6.18054C20.5012 5.64436 21.1425 4.80009 21.4483 3.80535C20.6429 4.30541 19.7618 4.65766 18.8429 4.84687C17.569 3.4367 15.5505 3.09352 13.9155 4.00911C12.2804 4.9247 11.4335 6.87238 11.848 8.76384C8.54901 8.59052 5.47544 6.95985 3.3921 4.27759C2.30485 6.23999 2.86046 8.74861 4.66182 10.0105C4.01043 9.98855 3.37348 9.804 2.80409 9.47219C2.80409 9.4902 2.80409 9.50821 2.80409 9.52622C2.80447 11.5704 4.18125 13.3312 6.09599 13.7363C5.49179 13.9083 4.85802 13.9337 4.24304 13.8104C4.78153 15.5585 6.32121 16.7561 8.07611 16.7919C6.62265 17.9856 4.82769 18.6329 2.98002 18.6298C2.65252 18.6303 2.32528 18.6106 2 18.5707C3.87627 19.8324 6.06002 20.5021 8.29028 20.4997C11.3931 20.522 14.375 19.242 16.569 16.946C18.763 14.6499 19.986 11.5295 19.9644 8.2826C19.9644 8.0965 19.9603 7.91141 19.952 7.72732C20.7556 7.11961 21.4491 6.36679 22 5.5042C21.2514 5.85144 20.4573 6.07941 19.6441 6.18054Z" fill="white"/>
-                </svg>
-            </button>
-            <button class="rounded-[8px] bg-[#343444] p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M12.2093 10.3581V13.8365H17.1483C16.6887 16.0469 14.7644 17.317 12.2093 17.317C9.2333 17.2769 6.84224 14.9062 6.84224 11.9955C6.84224 9.08482 9.2333 6.7141 12.2093 6.67404C13.4464 6.67259 14.6453 7.09241 15.6003 7.8614L18.28 5.24074C15.2061 2.59797 10.7169 2.25806 7.26368 4.40661C3.81044 6.55516 2.22311 10.6758 3.36842 14.5185C4.51374 18.3612 8.11645 21.0024 12.2093 21C16.8134 21 21 17.7252 21 11.995C20.9929 11.4433 20.9238 10.894 20.7939 10.3571L12.2093 10.3581Z" fill="white"/>
-                </svg>
-            </button>
-            <button class="rounded-[8px] bg-[#343444] p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M21 2.5V14.3756L16.304 19.1249H12.391L9.954 21.5H6.913V19.1249H3V5.66616L4.227 2.5H21ZM19.435 4.08308H6.13V15.9587H9.26V18.3328L11.609 15.9577H16.304L19.434 12.7915V4.08308H19.435ZM16.305 7.24924V11.9995H14.739V7.25025H16.304L16.305 7.24924ZM12.391 7.24924V11.9995H10.826V7.25025H12.391V7.24924Z" fill="white"/>
-                </svg>
-            </button>
-        </div>
+        <p class="leading-[22px] text-[14px] max-w-[245px] text-white mb-7">Lorem ipsum dolor sit amet,consectetur adipisicing elit.</p>
+        <x-networks boxColor="#343444" iconColor="white"/>
     </div>
     <div>
         <h2 class="text-white font-bold text-[18px]">My Account</h2>

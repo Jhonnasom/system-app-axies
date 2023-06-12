@@ -65,10 +65,11 @@
             </div>
         </section>
         <div class="col-span-2">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center mb-[40px]">
                 <h2 class="text-white text-[36px] font-bold">More From This Author</h2>
                 <a href="" class="text-white font-bold uppercase border-b-[1px] border-[#E250E5] text-[14px]">Explore More</a>
             </div>
+{{--            Container Principal Cards--}}
             <div class="flex items-center gap-x-[30px] overflow-hidden">
                 <x-card authorP="Creator" home="no" :buttons="false"></x-card>
                 <x-card authorP="Creator" home="no" :buttons="false"></x-card>

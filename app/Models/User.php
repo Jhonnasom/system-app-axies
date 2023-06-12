@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -42,4 +43,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function items():HasMany{
+        return $this->hasMany(Item::class);
+    }
+    public function collections():HasMany{
+        return $this->hasMany(Collection::class);
+    }
+
+//    Tablas pivote para la relacion de los seguidores
+    public function followers(): BelongsToMany {
+        return $this->belongsToMany(static::class, 'followers', 'followed_id', 'follower_id');
+    }
+    public function followed(): BelongsToMany {
+        return $this->belongsToMany(static::class, 'followers', 'follower_id', 'followed_id');
+    }
 }

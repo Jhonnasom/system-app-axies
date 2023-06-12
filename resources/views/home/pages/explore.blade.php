@@ -51,15 +51,12 @@
             </div>
         </aside>
         <section class="grid grid-cols-3 gap-x-[38px] gap-y-11">
-            <x-card home="" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" authorP="Creator" priceP="Price"></x-card>
+            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
+            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
+            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
+            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
+            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
+            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
             <x-primary-button class="col-start-2 place-self-center px-[30px]">
                 Load More
             </x-primary-button>

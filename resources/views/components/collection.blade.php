@@ -14,7 +14,7 @@
     </div>
     <div class="flex items-center justify-between">
         <div class="flex gap-x-2.5 items-center">
-            <x-user size="64px" check="18px"/>
+            <x-user/>
             <div class="flex flex-col gap-y-0.5">
                 <h3 class="text-white font-bold text-[20px]">{{ $name }}</h3>
                 <p class="text-[13px] text-[#8A8AA0]">Created By <span class="text-white font-bold text-[15px]">{{ $author }}</span></p>
