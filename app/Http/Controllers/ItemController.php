@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Collection;
 use App\Models\Item;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 
         $request->validate([
@@ -52,6 +53,7 @@ class ItemController extends Controller
             'collection_id' => $request->input('collection_id'),
 
         ]);
+    
 /**      image_item es el nombre que tenemos en el input de upload file**/
         $item->addMediaFromRequest('image_item')->toMediaCollection('image_items');
         return redirect()->back();

@@ -48,11 +48,13 @@
     <main class="px-[255px] py-[80px] flex gap-x-[80px] bg-[#14141F]">
         <aside class="flex flex-col gap-y-5">
             <h2 class="text-white font-bold text-[20px]">Preview Item</h2>
-            <x-card>
-
+            <x-card :isBuyeable="false">
+                <x-slot name="pictureShow">
+                    <img id="pictureShow" src="" alt="" class="w-full h-full">
+                </x-slot>
             </x-card>
         </aside>
-        <form class="flex-1" action="/items" method="post" enctype="multipart/form-data">
+        <form class="flex-1" method="post" action="{{ action([\App\Http\Controllers\ItemController::class, 'store']) }}"  enctype="multipart/form-data">
             @csrf
             <div class="flex flex-col gap-y-6">
                 <x-input-label for="img" class="flex flex-col gap-y-5 pointer-events-none" value="Upload File">
@@ -65,7 +67,8 @@
                                 Upload Image
                             </div>
                         </div>
-                       <x-text-input name="image_item" id="img" type="file" accept="image/png, image/jpg, image/gif, image/jpeg" class="hidden"/>
+{{--                        input para img--}}
+                       <x-text-input name="image_item" id="img"  type="file" accept="image/png, image/jpg, image/gif, image/jpeg" class="hidden"/>
                     </x-slot>
                 </x-input-label>
                 <x-input-label class="flex flex-col gap-y-5" value="Select Method">
@@ -81,10 +84,10 @@
                     </x-primary-button>
                 </x-input-label>
                 <x-input-label value="Price">
-                    <x-text-input name="price" class="px-[20px] py-3 text-[14px]" placeholder="Enter price for one item (ETH)"/>
+                    <x-text-input name="price" id="price"  class="px-[20px] py-3 text-[14px]" placeholder="Enter price for one item (ETH)"/>
                 </x-input-label>
                 <x-input-label value="Title">
-                    <x-text-input name="title" class="px-[20px] py-3 text-[14px]" placeholder="Item Name"/>
+                    <x-text-input name="title" id="title" class="px-[20px] py-3 text-[14px]" placeholder="Item Name"/>
                 </x-input-label>
                 <x-input-label class="flex flex-col gap-y-5" value="Description">
                     <textarea

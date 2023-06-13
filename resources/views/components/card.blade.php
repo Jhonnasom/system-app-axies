@@ -8,7 +8,8 @@
     'authorP' => 'Owned By',
     'priceP' => 'Current Bid',
     'home' =>'no',
-    'buttons' => true
+    'buttons' => true,
+    'isBuyeable'=>true
 ])
 @php
     if($buttons){
@@ -20,30 +21,33 @@
 {{--Container Card Principal--}}
 <article class="w-[330px] h-[{{$height}}] flex flex-col items-center bg-[#343444] rounded-[20px] p-[20px] group">
 {{--    Box-image gray secondary--}}
-    <div class="bg-[#7A798A] relative w-[290px] h-[290px] rounded-[20px] flex flex-col">
+    <div  class="bg-[#7A798A] overflow-hidden  object-cover object-center relative w-[290px] h-[290px] rounded-[20px] flex flex-col">
         <div class="absolute w-[64px] h-[28px] bg-[#14141F] rounded-[10px] top-[14px] right-[12px] flex justify-center items-center gap-x-[5px] text-white">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14" fill="none">
                 <path d="M14.7145 1.64672C12.9744 -0.092941 10.1436 -0.092941 8.40393 1.64672L7.99986 2.05055L7.59603 1.64672C5.85637 -0.0931764 3.02531 -0.0931764 1.28565 1.64672C-0.418689 3.35105 -0.429756 6.05261 1.25998 7.93096C2.80114 9.64354 7.34643 13.3435 7.53928 13.5001C7.6702 13.6065 7.82773 13.6583 7.98432 13.6583C7.9895 13.6583 7.99468 13.6583 7.99963 13.6581C8.16163 13.6656 8.32481 13.61 8.45997 13.5001C8.65282 13.3435 13.1986 9.64354 14.7402 7.93072C16.4297 6.05261 16.4186 3.35105 14.7145 1.64672ZM13.69 6.98578C12.4884 8.32066 9.18546 11.0738 7.99963 12.0508C6.8138 11.074 3.51155 8.32114 2.31018 6.98602C1.13142 5.67586 1.12035 3.80999 2.28452 2.64582C2.87908 2.05149 3.6599 1.75409 4.44072 1.75409C5.22154 1.75409 6.00236 2.05126 6.59693 2.64582L7.48512 3.53401C7.59085 3.63974 7.72412 3.70285 7.86399 3.72498C8.09099 3.77372 8.33729 3.71038 8.51389 3.53425L9.40256 2.64582C10.5919 1.45693 12.5266 1.45716 13.7152 2.64582C14.8794 3.80999 14.8683 5.67586 13.69 6.98578Z" fill="white"/>
             </svg>
-            {{ $likes }}
+            {{$likes}}
         </div>
 {{--        Group para el buttom de buy para comprar--}}
-        <div class="h-[262px] flex items-center justify-center">
-            <button class="w-[145px] h-[48px] group-hover:bg-white  hover:visible rounded-[30px] flex items-center justify-center gap-2">
-                <svg class="invisible group-hover:visible" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8761 5.39175H14.0558C16.4172 5.39175 18.3337 7.26675 18.3337 9.56675V14.1667C18.3337 16.4668 16.4172 18.3334 14.0558 18.3334H5.94488C3.58349 18.3334 1.66699 16.4668 1.66699 14.1667V9.56675C1.66699 7.26675 3.58349 5.39175 5.94488 5.39175H6.12456C6.14167 4.39175 6.54379 3.45842 7.27103 2.75841C8.00683 2.05008 8.94797 1.69175 10.0089 1.66675C12.1307 1.66675 13.8504 3.33341 13.8761 5.39175ZM8.1694 3.65008C7.69028 4.11675 7.42505 4.73341 7.40794 5.39175H12.5927C12.5671 4.02508 11.4206 2.91675 10.0089 2.91675C9.3501 2.91675 8.66564 3.17508 8.1694 3.65008ZM13.2515 8.60008C13.6108 8.60008 13.8932 8.31675 13.8932 7.97508V7.00841C13.8932 6.66675 13.6108 6.38341 13.2515 6.38341C12.9007 6.38341 12.6098 6.66675 12.6098 7.00841V7.97508C12.6098 8.31675 12.9007 8.60008 13.2515 8.60008ZM7.31379 7.97508C7.31379 8.31675 7.03145 8.60008 6.6721 8.60008C6.32132 8.60008 6.03042 8.31675 6.03042 7.97508V7.00841C6.03042 6.66675 6.32132 6.38341 6.6721 6.38341C7.03145 6.38341 7.31379 6.66675 7.31379 7.00841V7.97508Z" fill="#5142FC"/>
-                </svg>
-                <span class="group-hover:visible text-sm group-hover:text-blue-800 text-none invisible group-hover:font-bold group-hover:text-[15px]">Buy</span>
-            </button>
-        </div>
+        @if($isBuyeable)
+            <div class="absolute top-[121px] left-[72px]">
+                <button class="w-[145px] h-[48px] group-hover:bg-white  hover:visible rounded-[30px] flex items-center justify-center gap-2">
+                    <svg class="invisible group-hover:visible" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8761 5.39175H14.0558C16.4172 5.39175 18.3337 7.26675 18.3337 9.56675V14.1667C18.3337 16.4668 16.4172 18.3334 14.0558 18.3334H5.94488C3.58349 18.3334 1.66699 16.4668 1.66699 14.1667V9.56675C1.66699 7.26675 3.58349 5.39175 5.94488 5.39175H6.12456C6.14167 4.39175 6.54379 3.45842 7.27103 2.75841C8.00683 2.05008 8.94797 1.69175 10.0089 1.66675C12.1307 1.66675 13.8504 3.33341 13.8761 5.39175ZM8.1694 3.65008C7.69028 4.11675 7.42505 4.73341 7.40794 5.39175H12.5927C12.5671 4.02508 11.4206 2.91675 10.0089 2.91675C9.3501 2.91675 8.66564 3.17508 8.1694 3.65008ZM13.2515 8.60008C13.6108 8.60008 13.8932 8.31675 13.8932 7.97508V7.00841C13.8932 6.66675 13.6108 6.38341 13.2515 6.38341C12.9007 6.38341 12.6098 6.66675 12.6098 7.00841V7.97508C12.6098 8.31675 12.9007 8.60008 13.2515 8.60008ZM7.31379 7.97508C7.31379 8.31675 7.03145 8.60008 6.6721 8.60008C6.32132 8.60008 6.03042 8.31675 6.03042 7.97508V7.00841C6.03042 6.66675 6.32132 6.38341 6.6721 6.38341C7.03145 6.38341 7.31379 6.66675 7.31379 7.00841V7.97508Z" fill="#5142FC"/>
+                    </svg>
+                    <span class="group-hover:visible text-sm group-hover:text-blue-800 text-none invisible group-hover:font-bold group-hover:text-[15px]">Buy</span>
+                </button>
+            </div>
+        @endif
+        {{$pictureShow}}
     </div>
     @if($home == 'no')
         <div class="flex justify-between w-full mt-[21px] mb-[17px]">
-            <h1 class="text-white font-bold">"{{ $item_name }}"</h1>
+            <h1 id="titleShow" class="text-white font-bold"></h1>
             <button class="text-white font-bold rounded-[10px] bg-[#5142FC] py-0.5 px-3">BSC</button>
         </div>
     @else
-        <h1 class="text-white font-bold mt-[21px] mb-[17px]">"{{ $item_name }}"</h1>
+        <h1 id="titleShow" class="text-white font-bold mt-[21px] mb-[17px] ">"{{ $item_name }}"</h1>
     @endif
     <div class="flex justify-between w-full">
         <div class="flex gap-x-3">
@@ -52,13 +56,16 @@
             </div>
             <div class="flex flex-col gap-y-0.5">
                 <h2 class="text-[#8A8AA0] text-[13px]">{{ $authorP }}</h2>
-                <p class="font-bold text-white text-[15px]">{{ $author }}</p>
+                <p class="font-bold text-white text-[15px]">{{ \Illuminate\Support\Facades\Auth::user()->name}}</p>
             </div>
         </div>
         @if($home == 'no')
             <div>
                 <h2 class="text-[#8A8AA0] ml-1 text-[13px]">{{$priceP}}</h2>
-                <p class="font-bold text-white text-[18px]">{{ $price }} ETH</p>
+                <div class="flex w-[72px] h-[26px] gap-1">
+                <p id="priceShow" class="font-bold text-white text-[18px]">{{ $price }}</p>
+                <span class="font-bold text-white text-[18px]">ETH</span>
+                </div>
             </div>
         @elseif($home == 'yes')
             <button class="text-white font-bold rounded-[10px] text-[12px] bg-[#5142FC] py-0.5 px-3">BSC</button>

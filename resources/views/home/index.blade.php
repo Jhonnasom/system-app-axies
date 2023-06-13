@@ -136,14 +136,19 @@
     <section class="px-[255px] py-[80px] flex flex-col gap-y-10 bg-[#14141f]">
         <h1 class="text-white text-[36px] font-bold">Today's Picks</h1>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(330px,1fr))] grid-flow-row gap-y-10 gap-x-[30px]">
-            <x-card home="yes"></x-card>
-            <x-card home="yes"></x-card>
-            <x-card home="yes"></x-card>
-            <x-card home="yes"></x-card>
-            <x-card home="yes"></x-card>
-            <x-card home="yes"></x-card>
-            <x-card home="yes"></x-card>
-            <x-card home="yes"></x-card>
+            <x-card home="yes">
+                <x-slot name="pictureShow"></x-slot>
+            </x-card>
+            <x-card home="yes">
+                <x-slot name="pictureShow"></x-slot>
+            </x-card>
+            <x-card home="yes">
+                <x-slot name="pictureShow"></x-slot>
+            </x-card>
+            <x-card home="yes">
+                <x-slot name="pictureShow"></x-slot>
+            </x-card>
+
         </div>
         <x-primary-button class="mx-auto px-10">
             Load More
