@@ -66,7 +66,6 @@
                             </div>
                         </div>
                        <x-text-input name="image_item" id="img" type="file" accept="image/png, image/jpg, image/gif, image/jpeg" class="hidden"/>
-                         <x-media-library-attachment name="image_item"/>
                     </x-slot>
                 </x-input-label>
                 <x-input-label class="flex flex-col gap-y-5" value="Select Method">
