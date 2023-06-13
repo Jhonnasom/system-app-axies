@@ -24,15 +24,20 @@ class Item extends Model implements HasMedia
         'method',
         'collection_id'
     ];
-
-    function collections():HasMany
+    function categories():BelongsTo
     {
-        return $this->hasMany(Collection::class);
+        return $this->belongsTo(Category::class);
+    }
+
+
+    function collections():BelongsTo
+    {
+        return $this->belongsTo(Collection::class);
     }
 
     function user():BelongsTo
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
     public function likes(): MorphMany
     {
