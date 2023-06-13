@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collection;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -21,7 +23,8 @@ class ItemController extends Controller
      */
     public function create(): View
     {
-        return view('home.pages.create-item');
+        $collections = Collection::all();
+        return view('items.create', compact('collections'));
     }
 
     /**
@@ -29,7 +32,28 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'royalties' => 'required',
+            'size' => 'required',
+            'collection_id' => 'required',
+        ]);
+
+        $item = Auth::user()->items()->create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'royalties' => $request->input('royalties'),
+            'size' => $request->input('size'),
+            'method' => '$',
+            'collection_id' => $request->input('collection_id'),
+
+        ]);
+
+        $item->addMediaFromRequest($request->input('image_item'))->toMediaCollection('image_items');
     }
 
     /**
@@ -37,7 +61,7 @@ class ItemController extends Controller
      */
     public function show(Item $item): View
     {
-        return \view('home.pages.item-details', ['item' => $item]);
+        return \view('items.show', ['item' => $item]);
     }
 
     /**

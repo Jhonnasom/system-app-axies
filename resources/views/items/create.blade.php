@@ -52,7 +52,8 @@
 
             </x-card>
         </aside>
-        <form class="flex-1" action="">
+        <form class="flex-1" action="/items" method="post" enctype="multipart/form-data">
+            @csrf
             <div class="flex flex-col gap-y-6">
                 <x-input-label for="img" class="flex flex-col gap-y-5 pointer-events-none" value="Upload File">
                     <x-slot name="input">
@@ -64,8 +65,8 @@
                                 Upload Image
                             </div>
                         </div>
-                        <x-text-input id="img" type="file" accept="image/png, image/jpg, image/gif, image/jpeg"
-                                      class="hidden"/>
+                       <x-text-input name="image_item" id="img" type="file" accept="image/png, image/jpg, image/gif, image/jpeg" class="hidden"/>
+                         <x-media-library-attachment name="image_item"/>
                     </x-slot>
                 </x-input-label>
                 <x-input-label class="flex flex-col gap-y-5" value="Select Method">
@@ -81,30 +82,34 @@
                     </x-primary-button>
                 </x-input-label>
                 <x-input-label value="Price">
-                    <x-text-input class="px-[20px] py-3 text-[14px]" placeholder="Enter price for one item (ETH)"/>
+                    <x-text-input name="price" class="px-[20px] py-3 text-[14px]" placeholder="Enter price for one item (ETH)"/>
                 </x-input-label>
                 <x-input-label value="Title">
-                    <x-text-input class="px-[20px] py-3 text-[14px]" placeholder="Item Name"/>
+                    <x-text-input name="title" class="px-[20px] py-3 text-[14px]" placeholder="Item Name"/>
                 </x-input-label>
                 <x-input-label class="flex flex-col gap-y-5" value="Description">
                     <textarea
+                        name="description"
                         class="h-[80px] text-white resize-none border-[#343444] border-[1px] bg-transparent rounded-[8px] font-medium shadow-sm"
                         placeholder="e.g. “This is very limited item"></textarea>
                 </x-input-label>
                 <div class="flex gap-x-5 items-center">
                     <x-input-label class="flex flex-1 flex-col gap-y-5" value="Royalties">
-                        <x-text-input placeholder="5%" type="text"/>
+                        <x-text-input name="royalties" placeholder="5%" type="text"/>
                     </x-input-label>
                     <x-input-label class="flex flex-1 flex-col gap-y-5" value="Size">
-                        <x-text-input placeholder="e.g. “size”" type="text"/>
+                        <x-text-input name="size" placeholder="e.g. “size”" type="text"/>
                     </x-input-label>
                     <x-input-label class="flex flex-1 flex-col gap-y-5" value="Collection">
-                        <select
+                        <select name="collection_id"
                             class="text-[#8A8AA0] border-[#343444] border-[1px] bg-transparent rounded-[8px] font-medium shadow-sm">
-                            <option class="text-inherit bg-transparent" value="">Collection</option>
+                            @foreach($collections as $collection)
+                                <option class="text-inherit bg-transparent" value="{{$collection->id}}">{{$collection->name}}</option>
+                            @endforeach
                         </select>
                     </x-input-label>
                 </div>
+                <button class="text-white" type="submit">Crear Item</button>
             </div>
         </form>
     </main>
