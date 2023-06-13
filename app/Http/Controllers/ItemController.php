@@ -51,9 +51,8 @@ class ItemController extends Controller
             'size' => $request->input('size'),
             'method' => '$',
             'collection_id' => $request->input('collection_id'),
-
         ]);
-    
+
 /**      image_item es el nombre que tenemos en el input de upload file**/
         $item->addMediaFromRequest('image_item')->toMediaCollection('image_items');
         return redirect()->back();
