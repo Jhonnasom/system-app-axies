@@ -28,8 +28,6 @@ Route::get('/items_details', function () {
 });
 
 Route::get('/home', function () {
-//    Relacion para traerme todos los datos la relacion de collection
-    \App\Models\Collection::query()->with(['user','items','likes']);
     return view('home.index');
 })->middleware(['auth', 'verified'])->name('home');
 
