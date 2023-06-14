@@ -81,7 +81,7 @@
                             <path d="M20.9521 13.7637H16.8961C15.2041 13.7637 13.8481 15.1329 13.8481 16.8369V20.9276C13.8481 22.6196 15.2041 23.9996 16.8961 23.9996H20.9521C22.6321 23.9996 24.0001 22.6196 24.0001 20.9276V16.8369C24.0001 15.1329 22.6321 13.7637 20.9521 13.7637Z" fill="white"/>
                         </svg>
                     </div>
-                    <h2 class="text-[24px] text-white font-bold mt-[24px]">Create Your Collection</h2>
+                    <a href="{{ action([\App\Http\Controllers\CollectionController::class, 'create']) }}" class="text-[24px] text-white font-bold mt-[24px]">Create Your Collection</a>
                     <p class="text-white text-[14px] mt-[10px] text-center">Click Create and set up your collection. Add social links, a description, profile & banner images, and set a secondary sales fee.</p>
                 </div>
                 <div class="flex flex-col items-center">
