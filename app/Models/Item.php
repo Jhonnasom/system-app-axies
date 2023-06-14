@@ -21,7 +21,8 @@ class Item extends Model implements HasMedia
         'royalties',
         'size',
         'method',
-        'collection_id'
+        'collection_id',
+        'category_id'
     ];
     function categories():BelongsTo
     {

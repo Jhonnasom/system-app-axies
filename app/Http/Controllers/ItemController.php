@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Collection;
 use App\Models\Item;
 use Illuminate\Http\RedirectResponse;
@@ -25,7 +26,8 @@ class ItemController extends Controller
     public function create(): View
     {
         $collections = Collection::all();
-        return view('items.create', compact('collections'));
+        $categories = Category::all();
+        return view('items.create', compact('collections', 'categories'));
     }
 
     /**
@@ -33,14 +35,13 @@ class ItemController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-
         $request->validate([
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
             'royalties' => 'required',
-            'size' => 'required',
             'collection_id' => 'required',
+            'category_id'=>'required'
         ]);
 
         $item = Auth::user()->items()->create([
@@ -48,10 +49,11 @@ class ItemController extends Controller
             'description' => $request->input('description'),
             'price' => $request->input('price'),
             'royalties' => $request->input('royalties'),
-            'size' => $request->input('size'),
             'method' => '$',
             'collection_id' => $request->input('collection_id'),
+            'category_id' => $request->input('category_id'),
         ]);
+
 
 /**      image_item es el nombre que tenemos en el input de upload file**/
         $item->addMediaFromRequest('image_item')->toMediaCollection('image_items');

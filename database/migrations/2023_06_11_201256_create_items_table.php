@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price');
             $table->string('royalties');
-            $table->string('size');
             $table->string('method');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('collection_id')->references('id')->on('collections');
