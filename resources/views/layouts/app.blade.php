@@ -148,22 +148,29 @@
 <script>
     const title = document.getElementById("title");
     const titleShow = document.getElementById("titleShow");
-    title.addEventListener("input", () => {
-        titleShow.innerText = title.value;
-    });
+    if (title !== null && title !== undefined) {
+        title.addEventListener("input", () => {
+            titleShow.innerText = title.value;
+        });
+    }
+
 
     const price = document.getElementById("price");
     const priceShow = document.getElementById("priceShow");
-    price.addEventListener("input", () => {
-        priceShow.innerText = price.value;
-    });
+    if (price !== null && price !== undefined) {
+        price.addEventListener("input", () => {
+            priceShow.innerText = price.value;
+        });
+    }
 
     const pictureInput = document.getElementById("img");
     const pictureShow = document.getElementById("pictureShow");
-    pictureInput.addEventListener("change", () => {
-        const file = pictureInput.files[0];
-        pictureShow.src = URL.createObjectURL(file);
-    });
+    if (pictureInput !== null && pictureInput !== undefined) {
+        pictureInput.addEventListener("change", () => {
+            const file = pictureInput.files[0];
+            pictureShow.src = URL.createObjectURL(file);
+        });
+    }
 
 </script>
 </html>
