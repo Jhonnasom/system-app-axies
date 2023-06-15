@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class CollectionController extends Controller
 {
@@ -17,9 +20,9 @@ class CollectionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create():View
     {
-        //
+        return view('collections.create');
     }
 
     /**
@@ -27,7 +30,15 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $collection = Auth::user()->collections()->create([
+            'name' => $request->input('name'),
+        ]);
+
+        return redirect()->back();
     }
 
     /**
