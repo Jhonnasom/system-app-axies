@@ -23,10 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/items_details', function () {
-    return view('home.pages.item-details');
-});
-
 Route::get('/home', function () {
     return view('home.index');
 })->middleware(['auth', 'verified'])->name('home');
