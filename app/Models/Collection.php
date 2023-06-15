@@ -27,7 +27,7 @@ class Collection extends Model implements HasMedia
 
     function user():BelongsTo
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function likes(): MorphMany
