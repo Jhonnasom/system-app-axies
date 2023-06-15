@@ -25,7 +25,7 @@ class ItemController extends Controller
      */
     public function create(): View
     {
-        $collections = Collection::all();
+        $collections = Auth::user()->collections()->get();
         $categories = Category::all();
         return view('items.create', compact('collections', 'categories'));
     }
