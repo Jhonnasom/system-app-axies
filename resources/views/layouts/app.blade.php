@@ -144,7 +144,6 @@
 </footer>
 </body>
 @stack('scripts')
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.min.js" defer></script>
 <script>
     const title = document.getElementById("title");
     const titleShow = document.getElementById("titleShow");
