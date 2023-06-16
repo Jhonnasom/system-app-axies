@@ -7,7 +7,7 @@
             <img class="w-full object-center object-cover" src="" alt="Item Image">
         </div>
         <section class="flex flex-col gap-y-4">
-            <h1 class="text-white font-bold text-[36px]">"Hello world aljfakljf"</h1>
+            <h1 class="text-white font-bold text-[36px]">"Hello world"</h1>
             <div class="flex flex-col gap-y-6">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-x-3">
@@ -71,10 +71,10 @@
             </div>
 {{--            Container Principal Cards--}}
             <div class="flex items-center gap-x-[30px] overflow-hidden">
-                <x-card authorP="Creator" home="no" :buttons="false"></x-card>
-                <x-card authorP="Creator" home="no" :buttons="false"></x-card>
-                <x-card authorP="Creator" home="no" :buttons="false"></x-card>
-                <x-card authorP="Creator" home="no" :buttons="false"></x-card>
+                <x-card_author></x-card_author>
+                <x-card_author></x-card_author>
+                <x-card_author></x-card_author>
+                <x-card_author></x-card_author>
             </div>
         </div>
     </main>
