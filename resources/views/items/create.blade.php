@@ -61,7 +61,7 @@
             @csrf
             <div class="flex flex-col gap-y-6">
 
-                <x-input-label for="img" class="flex flex-col gap-y-5 pointer-events-none" value="Upload File">
+                <x-input-label for="img" name="image_item" class="flex flex-col gap-y-5 pointer-events-none" value="Upload File">
 {{--                    Campo de input Upload File--}}
                     <x-slot name="input">
 {{--                        Div contenedor del Input File--}}

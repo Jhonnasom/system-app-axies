@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
@@ -23,9 +24,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home.index');
-})->middleware(['auth', 'verified'])->name('home');
+Route::get('/showitem', function () {
+    return view('items.show');
+});
+
+
+
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -114,8 +114,9 @@
         </div>
         <div class="flex items-center gap-x-[30px]">
             @foreach($collections as $collection)
+{{--                Container principal de las cards--}}
                 <article class="flex flex-col gap-y-[15px] p-5 bg-[#343444] w-[450px] h-[395px] rounded-[10px]">
-                    <div class="grid grid-cols-6 gap-[10px]">
+                    <div class="grid grid-cols-6 gap-[10px] w-[410px] h-[272px]">
                         @foreach($collection->items as $item)
                             @if($loop->iteration <= 2)
                                 <div class="bg-[#7A798A] col-span-3 h-[131px] rounded-[10px]"><img src="{{$item->getFirstMediaUrl('image_items')}}" alt="" class="w-full object-center object-cover col-span-3 h-[131px] rounded-[10px]"></div>
@@ -128,7 +129,7 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex gap-x-2.5 items-center">
-                            <x-user url_img="{{$collection->user->getFirstMediaUrl('profile')}}"/>
+                            <x-user class="h-[64px] w-[64px]" url_img="{{$collection->user->getFirstMediaUrl('profile')}}"/>
                             <div class="flex flex-col gap-y-0.5">
                                 <h3 class="text-white font-bold text-[20px]">{{$collection->name}}</h3>
                                 <p class="text-[13px] text-[#8A8AA0]">Created By <span class="text-white font-bold text-[15px]">{{ $collection->user->name}}</span></p>
