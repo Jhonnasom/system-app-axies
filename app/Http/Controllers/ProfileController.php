@@ -57,4 +57,18 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function update_image(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif'
+        ]);
+
+        //Eliminar las imagenes anteriores
+        $request->user()->clearMediaCollection('profile');
+        //Agregar la nueva imagen
+        $request->user()->addMediaFromRequest('image')->toMediaCollection('profile');
+
+        return redirect()->back();
+    }
 }
