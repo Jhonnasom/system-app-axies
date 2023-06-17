@@ -12,18 +12,12 @@
                     </svg>
                 </div>
                 <div class="flex flex-col gap-y-2  transition-[height, opacity] duration-1000">
-                    <div class="flex items-center gap-x-2">
-                        <input class="bg-transparent rounded-[4px] border-[#343444]" type="checkbox">
-                        <p class="text-white text-[13px]">Pepito</p>
-                    </div>
-                    <div class="flex items-center gap-x-2">
-                        <input class="bg-transparent rounded-[4px] border-[#343444]" type="checkbox">
-                        <p class="text-white text-[13px]">Pepito</p>
-                    </div>
-                    <div class="flex items-center gap-x-2">
-                        <input class="bg-transparent rounded-[4px] border-[#343444]" type="checkbox">
-                        <p class="text-white text-[13px]">Pepito</p>
-                    </div>
+                    @foreach($categories as $category)
+                        <div class="flex items-center gap-x-2">
+                            <input class="bg-transparent rounded-[4px] border-[#343444]" type="checkbox">
+                            <p class="text-white text-[13px]">{{$category->name}}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <div class="bg-[#343444] w-full h-[1px]"></div>
@@ -35,32 +29,35 @@
                     </svg>
                 </div>
                 <div class="flex flex-col gap-y-2 transition-[height, opacity] duration-1000">
-                    <div class="flex items-center gap-x-2">
-                        <input class="bg-transparent rounded-[4px] border-[#343444]" type="checkbox">
-                        <p class="text-white text-[13px]">Pepito</p>
-                    </div>
-                    <div class="flex items-center gap-x-2">
-                        <input class="bg-transparent rounded-[4px] border-[#343444]" type="checkbox">
-                        <p class="text-white text-[13px]">Pepito</p>
-                    </div>
-                    <div class="flex items-center gap-x-2">
-                        <input class="bg-transparent rounded-[4px] border-[#343444]" type="checkbox">
-                        <p class="text-white text-[13px]">Pepito</p>
-                    </div>
+                    @foreach($collections as $collection)
+                        <div class="flex items-center gap-x-2">
+                            <input class="bg-transparent rounded-[4px] border-[#343444]" type="checkbox">
+                            <p class="text-white text-[13px]">{{$collection->name}}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </aside>
-        <section class="grid grid-cols-3 gap-x-[38px] gap-y-11">
-            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
-            <x-card home="" :buttons="false" authorP="Creator" priceP="Price"></x-card>
+        <div class="flex flex-col">
+            <section class="grid grid-cols-3 gap-x-[38px] gap-y-11">
+                @foreach($items as $item)
+                    <x-card :isBuyeable="false" home="yes" :buttons="false"
+                            author="{{$item->user->name}}"
+                            authorP="Creator"
+                            item_name="{{$item->title}}"
+                            price="{{$item->price}}"
+                            priceP="Price"
+                            author_image="{{$item->user->getFirstMediaUrl('profile')}}">
+                        <x-slot name="pictureShow">
+                            <img id="pictureShow" src="{{$item->getFirstMediaUrl('image_items')}}" alt="" class="w-full h-full">
+                        </x-slot>
+                    </x-card>
+                @endforeach
+            </section>
             <x-primary-button class="col-start-2 place-self-center px-[30px]">
-                Load More
+                <a href="/home/explore?limit=0">Load More</a>
             </x-primary-button>
-        </section>
+        </div>
     </main>
     @push('scripts')
         <script>

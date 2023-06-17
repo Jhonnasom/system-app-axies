@@ -110,7 +110,7 @@
     <section class="px-[255px] py-[80px] bg-[#14141f] flex flex-col gap-y-[38px]">
         <div class="flex justify-between items-center">
             <h1 class="text-white text-[36px] font-bold">Popular Collection</h1>
-            <a href="" class="text-white font-bold uppercase border-b-[1px] border-[#E250E5] text-[14px]">Explore More</a>
+            <a href="/home/explore" class="text-white font-bold uppercase border-b-[1px] border-[#E250E5] text-[14px]">Explore More</a>
         </div>
         <div class="flex items-center gap-x-[30px]">
             @foreach($collections as $collection)
