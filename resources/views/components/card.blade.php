@@ -1,7 +1,7 @@
 @props([
     'likes' => 0,
     'item_name' => '',
-    'author' => '',
+    'author' => \Illuminate\Support\Facades\Auth::user()->name,
     'price' => 0,
     'item_image' => '',
     'author_image' => '',
@@ -9,7 +9,8 @@
     'priceP' => 'Current Bid',
     'home' =>'no',
     'buttons' => true,
-    'isBuyeable'=>true
+    'isBuyeable'=>true,
+    'pictureShow' => '',
 ])
 @php
     if($buttons){
@@ -47,16 +48,16 @@
             <button class="text-white font-bold rounded-[10px] bg-[#5142FC] py-0.5 px-3">BSC</button>
         </div>
     @else
-        <h1 id="titleShow" class="text-white font-bold mt-[21px] mb-[17px] ">"{{ $item_name }}"</h1>
+        <h1 id="titleShow" class="text-white font-bold mt-[21px] mb-[17px] ">{{$item_name}}</h1>
     @endif
     <div class="flex justify-between w-full">
         <div class="flex gap-x-3">
             <div class="w-[44px] h-[44px] rounded-[15px] bg-[#7A798A]">
-                <img src="{{ $author_image }}" alt="Author image">
+                <img src="{{ $author_image }}" alt="Author image" class="rounded-[15px]">
             </div>
             <div class="flex flex-col gap-y-0.5">
                 <h2 class="text-[#8A8AA0] text-[13px]">{{ $authorP }}</h2>
-                <p class="font-bold text-white text-[15px]">{{ \Illuminate\Support\Facades\Auth::user()->name}}</p>
+                <p class="font-bold text-white text-[15px]">{{$author}}</p>
             </div>
         </div>
         @if($home == 'no')
