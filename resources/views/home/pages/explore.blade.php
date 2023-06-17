@@ -14,7 +14,7 @@
                 <div class="flex flex-col gap-y-2  transition-[height, opacity] duration-1000">
                     @foreach($categories as $category)
                         <div class="flex items-center gap-x-2">
-                            <input class="bg-transparent rounded-[4px] border-[#343444]" type="checkbox">
+                            <input class="bg-transparent rounded-[4px] border-[#343444] categoriesCheckbox" data-id="{{$category->id}}" type="checkbox">
                             <p class="text-white text-[13px]">{{$category->name}}</p>
                         </div>
                     @endforeach
@@ -31,12 +31,15 @@
                 <div class="flex flex-col gap-y-2 transition-[height, opacity] duration-1000">
                     @foreach($collections as $collection)
                         <div class="flex items-center gap-x-2">
-                            <input class="bg-transparent rounded-[4px] border-[#343444]" type="checkbox">
+                            <input class="bg-transparent rounded-[4px] border-[#343444] collectionsCheckbox" data-id="{{$collection->id}}" type="checkbox">
                             <p class="text-white text-[13px]">{{$collection->name}}</p>
                         </div>
                     @endforeach
                 </div>
             </div>
+            <button class="flex justify-center items-center py-4 border-[#FFFFFF] border-[1.5px] font-bold text-[15px] text-white rounded-[56px]" onclick="filtrar()">
+                To Filter
+            </button>
         </aside>
         <div class="flex flex-col">
             <section class="grid grid-cols-3 gap-x-[38px] gap-y-11">
@@ -54,16 +57,60 @@
                     </x-card>
                 @endforeach
             </section>
-            <x-primary-button class="col-start-2 place-self-center px-[30px]">
-                <a href="/home/explore?limit=0">Load More</a>
-            </x-primary-button>
+            <button id="bntLoadMoreOrLess" class="col-start-2 mt-6 place-self-center px-[30px] flex justify-center items-center py-4 border-[#FFFFFF] border-[1.5px] font-bold text-[15px] text-white rounded-[56px]" onclick="LoadMoreOrLess()">
+                Load More
+            </button>
         </div>
     </main>
     @push('scripts')
         <script>
+            //Se ejecuta cuando se carga la pagina
             const drops = document.querySelectorAll('.drop');
 
             let count = 0;
+
+            let limit = 6;
+            //Se obtienen los parametros de la url
+            const queryString = window.location.search;
+            console.log(queryString);
+            //Se buscan los parametros de la url
+            const urlParams = new URLSearchParams(queryString);
+
+            //Se verifica si existe el parametros categories y si no esta vacio
+            if (urlParams.has('categories') && urlParams.get('categories') !== '') {
+                //Se obtiene el valor del parametro categories
+                const categories = urlParams.get('categories');
+                //Se obtienen todos los elementos con la clase categoriesCheckbox
+                var inputCategoriesElements = document.getElementsByClassName('categoriesCheckbox');
+                //Se recorren todos los elementos con la clase categoriesCheckbox
+                for(var i=0; inputCategoriesElements[i]; ++i){
+                    //Se recorren todos los valores del parametro categories
+                    for(var j=0; categories[j]; ++j){
+                        //Se verifica si el id del elemento es igual al valor del parametro categories
+                        //para marcar el checkbox
+                        if(inputCategoriesElements[i].dataset.id === categories[j]){
+                            inputCategoriesElements[i].checked = true;
+                        }
+                    }
+                }
+            }
+            if (urlParams.has('collections') && urlParams.get('collections') !== '') {
+                const collections = urlParams.get('collections');
+                var inputCollectionsElements = document.getElementsByClassName('collectionsCheckbox');
+                for(var i=0; inputCollectionsElements[i]; ++i){
+                    for(var j=0; collections[j]; ++j){
+                        if(inputCollectionsElements[i].dataset.id === collections[j]){
+                            inputCollectionsElements[i].checked = true;
+                        }
+                    }
+                }
+            }
+            //Se verifica si existe el parametros limit y si no esta vacio
+            if (urlParams.has('limit') && urlParams.get('limit') == 0) {
+                var bntLoadMoreOrLess = document.getElementById('bntLoadMoreOrLess');
+                bntLoadMoreOrLess.innerHTML = 'Load Less';
+                limit = urlParams.get('limit');
+            }
 
             drops.forEach((item, i) => {
                 item.addEventListener('click', function(e) {
@@ -77,6 +124,54 @@
                     count++;
                 })
             })
+
+            function LoadMoreOrLess() {
+                if (limit == 0) {
+                    limit=6;
+                } else {
+                    limit=0;
+                }
+                filtrar();
+            }
+
+            function filtrar() {
+                //Se inicializa la variable categoriesCheckbox
+                var categoriesCheckbox = [];
+                //Se obtienen todos los elementos con la clase categoriesCheckbox
+                var inputCategoriesElements = document.getElementsByClassName('categoriesCheckbox');
+                //Contador para el arreglo categoriesCheckbox
+                let counterCategories = 0;
+                //Se recorren todos los elementos con la clase categoriesCheckbox
+                for(var i=0; inputCategoriesElements[i]; ++i){
+                    //Se verifica si el checkbox esta marcado
+                    if(inputCategoriesElements[i].checked){
+                        //Se agrega el id del elemento al arreglo categoriesCheckbox
+                        categoriesCheckbox[counterCategories] = inputCategoriesElements[i].dataset.id;
+                        //Se incrementa el contador
+                        counterCategories++;
+                    }
+                }
+
+                //Se inicializa la variable collectionsCheckbox
+                var collectionsCheckbox = [];
+                //Se obtienen todos los elementos con la clase collectionsCheckbox
+                var inputCollectionsElements = document.getElementsByClassName('collectionsCheckbox');
+                //Contador para el arreglo collectionsCheckbox
+                let counterCollections = 0;
+                //Se recorren todos los elementos con la clase collectionsCheckbox
+                for(var i=0; inputCollectionsElements[i]; ++i){
+                    //Se verifica si el checkbox esta marcado
+                    if(inputCollectionsElements[i].checked){
+                        //Se agrega el id del elemento al arreglo collectionsCheckbox
+                        collectionsCheckbox[counterCollections] = inputCollectionsElements[i].dataset.id;
+                        //Se incrementa el contador
+                        counterCollections++;
+                    }
+                }
+
+                //Se redirecciona a la pagina con los parametros de filtrado
+                window.location = "/home/explore?categories="+categoriesCheckbox+"&collections="+collectionsCheckbox+"&limit=" + limit;
+            }
         </script>
     @endpush
 </x-app-layout>

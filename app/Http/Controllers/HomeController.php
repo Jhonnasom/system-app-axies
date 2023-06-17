@@ -27,10 +27,29 @@ class HomeController extends Controller
             ->withWhereHas('items')
             ->get();
 
+        //se crea la consulta, para luego anidar los filtros
+        $query_items = Item::query();
+
+        //se valida que exista el parametro y que no este vacio
+        if($request->has('categories') && $request->input('categories') != '') {
+            //se convierte el string a un array de enteros
+            $explode_id = array_map('intval', explode(',', $request->input('categories')));
+            //se filtra la consulta con los ids del array
+            $query_items->whereIn('category_id', $explode_id);
+        }
+
+        //se valida que exista el parametro y que no este vacio
+        if($request->has('collections') && $request->input('collections') != '') {
+            //se convierte el string a un array de enteros
+            $explode_id = array_map('intval', explode(',', $request->input('collections')));
+            //se filtra la consulta con los ids del array
+            $query_items->whereIn('collection_id', $explode_id);
+        }
+
         if($request->has('limit') && $request->input('limit') == 0) {
-            $items = Item::all();
+            $items = $query_items->get();
         } else {
-            $items = Item::all()->take(6);
+            $items = $query_items->get()->take(6);
         }
 
         return view('home.pages.explore', compact('collections', 'categories', 'items'));
