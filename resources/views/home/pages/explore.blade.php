@@ -44,17 +44,19 @@
         <div class="flex flex-col">
             <section class="grid grid-cols-3 gap-x-[38px] gap-y-11">
                 @foreach($items as $item)
-                    <x-card :isBuyeable="false" home="yes" :buttons="false"
-                            author="{{$item->user->name}}"
-                            authorP="Creator"
-                            item_name="{{$item->title}}"
-                            price="{{$item->price}}"
-                            priceP="Price"
-                            author_image="{{$item->user->getFirstMediaUrl('profile')}}">
-                        <x-slot name="pictureShow">
-                            <img id="pictureShow" src="{{$item->getFirstMediaUrl('image_items')}}" alt="" class="w-full h-full">
-                        </x-slot>
-                    </x-card>
+                    <div onclick="showItem({{$item->id}})" class="hover:cursor-pointer">
+                        <x-card :isBuyeable="false" home="yes" :buttons="false"
+                                author="{{$item->user->name}}"
+                                authorP="Creator"
+                                item_name="{{$item->title}}"
+                                price="{{$item->price}}"
+                                priceP="Price"
+                                author_image="{{$item->user->getFirstMediaUrl('profile')}}">
+                            <x-slot name="pictureShow">
+                                <img id="pictureShow" src="{{$item->getFirstMediaUrl('image_items')}}" alt="" class="w-full h-full">
+                            </x-slot>
+                        </x-card>
+                    </div>
                 @endforeach
             </section>
             <button id="bntLoadMoreOrLess" class="col-start-2 mt-6 place-self-center px-[30px] flex justify-center items-center py-4 border-[#FFFFFF] border-[1.5px] font-bold text-[15px] text-white rounded-[56px]" onclick="LoadMoreOrLess()">
@@ -124,6 +126,11 @@
                     count++;
                 })
             })
+
+            //Funcion para mostrar el detalle del item
+            function showItem(id) {
+                window.location = '/items/' + id;
+            }
 
             function LoadMoreOrLess() {
                 if (limit == 0) {

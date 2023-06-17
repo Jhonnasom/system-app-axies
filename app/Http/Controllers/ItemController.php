@@ -65,7 +65,11 @@ class ItemController extends Controller
      */
     public function show(Item $item): View
     {
-        return \view('items.show', ['item' => $item]);
+        $other_items = Item::query()
+            ->where('id', '!=', $item->id)
+            ->where('user_id', $item->user_id)
+            ->get();
+        return \view('items.show', ['item' => $item, 'other_items' => $other_items]);
     }
 
     /**
