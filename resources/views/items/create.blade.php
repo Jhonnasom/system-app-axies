@@ -48,7 +48,8 @@
     <main class="px-[255px] py-[80px] flex gap-x-[80px] bg-[#14141F]">
         <aside class="flex flex-col gap-y-5">
             <h2 class="text-white font-bold text-[20px]">Preview Item</h2>
-            <x-card :isBuyeable="false">
+            <x-card :isBuyeable="false"
+                    author_image="{{Auth()->user()->getFirstMediaUrl('profile')}}">
                 <x-slot name="pictureShow">
                     <img id="pictureShow" src="" alt="" class="w-full h-full">
                 </x-slot>
