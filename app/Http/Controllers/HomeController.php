@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Collection;
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -15,7 +16,9 @@ class HomeController extends Controller
         $collections = Collection::query()
         ->withWhereHas('items')->take(3)
         ->get();
-        return view('home.index', compact('collections'));
+
+        $users = User::query()->withWhereHas('items')->get();
+        return view('home.index', compact('collections', 'users'));
     }
 
     public function explore(Request $request):View

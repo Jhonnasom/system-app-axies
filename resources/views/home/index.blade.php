@@ -149,16 +149,9 @@
     <section class="px-[255px] py-[80px] flex flex-col gap-y-10 bg-[#14141f]">
         <h1 class="text-white text-[36px] font-bold">Top Sellers</h1>
         <div class="grid grid-cols-5 gap-y-7 gap-x-[68px]">
-            <x-top-seller></x-top-seller>
-            <x-top-seller></x-top-seller>
-            <x-top-seller></x-top-seller>
-            <x-top-seller></x-top-seller>
-            <x-top-seller></x-top-seller>
-            <x-top-seller></x-top-seller>
-            <x-top-seller></x-top-seller>
-            <x-top-seller></x-top-seller>
-            <x-top-seller></x-top-seller>
-            <x-top-seller></x-top-seller>
+            @foreach($users as $user)
+                <x-top-seller url_img="{{$user->getFirstMediaUrl('profile')}}" name="{{$user->name}}"></x-top-seller>
+            @endforeach
         </div>
     </section>
     <section class="px-[255px] py-[80px] flex flex-col gap-y-10 bg-[#14141f]">
