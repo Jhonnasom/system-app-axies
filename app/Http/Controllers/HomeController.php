@@ -18,7 +18,10 @@ class HomeController extends Controller
         ->get();
 
         $users = User::query()->withWhereHas('items')->get();
-        return view('home.index', compact('collections', 'users'));
+
+        $items = Item::all()->take(4);
+
+        return view('home.index', compact('collections', 'users', 'items'));
     }
 
     public function explore(Request $request):View

@@ -157,19 +157,15 @@
     <section class="px-[255px] py-[80px] flex flex-col gap-y-10 bg-[#14141f]">
         <h1 class="text-white text-[36px] font-bold">Today's Picks</h1>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(330px,1fr))] grid-flow-row gap-y-10 gap-x-[30px]">
-            <x-card home="yes">
-                <x-slot name="pictureShow"></x-slot>
-            </x-card>
-            <x-card home="yes">
-                <x-slot name="pictureShow"></x-slot>
-            </x-card>
-            <x-card home="yes">
-                <x-slot name="pictureShow"></x-slot>
-            </x-card>
-            <x-card home="yes">
-                <x-slot name="pictureShow"></x-slot>
-            </x-card>
-
+            @foreach($items as $item)
+                <x-card home="yes" item_name="{{$item->title}}" author="{{$item->user->name}}" authorP="Creator"
+                        priceP="Price" price="{{$item->price}}"
+                        author_image="{{$item->user->getFirstMediaUrl('profile')}}">
+                    <x-slot name="pictureShow">
+                        <img id="pictureShow" src="{{$item->getFirstMediaUrl('image_items')}}" alt="" class="w-full h-full">
+                    </x-slot>
+                </x-card>
+            @endforeach
         </div>
         <x-primary-button class="mx-auto px-10">
             Load More

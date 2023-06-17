@@ -30,7 +30,7 @@
             {{$likes}}
         </div>
 {{--        Group para el buttom de buy para comprar--}}
-        @if($isBuyeable)
+        @if($isBuyeable===true)
             <div class="absolute top-[121px] left-[72px]">
                 <button class="w-[145px] h-[48px] group-hover:bg-white  hover:visible rounded-[30px] flex items-center justify-center gap-2">
                     <svg class="invisible group-hover:visible" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
