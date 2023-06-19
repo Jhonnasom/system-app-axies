@@ -24,6 +24,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/pusher/test', function () {
+    event(new App\Events\CollectionsLiked(3, 5));
+    return "Event has been sent!";
+});
+
+Route::get("/pusher", function () {
+    return view("pusher.welcome");
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
