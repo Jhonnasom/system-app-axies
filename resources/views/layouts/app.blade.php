@@ -15,12 +15,12 @@
 </head>
 <body class="font-[Urbanist] w-screen max-w-[1920px] overflow-x-hidden mx-auto">
 <header>
-    <div class="flex w-full py-4 pl-[255px] pr-[268px] bg-[#14141FB2] items-center justify-between border-b-[1px] border-[#8A8AA0]">
+    <div class="flex w-full  py-4 pl-[255px] pr-[268px] bg-[#14141FB2] items-center justify-between border-b-[1px] border-[#8A8AA0]">
         <x-logo/>
-        <nav>
+        <nav class="">
             <ul class="flex items-center gap-x-10">
-                <li><a class="font-bold text-white text-[18px]" href="{{route('home') }}">Home</a></li>
-                <li><a class="flex gap-x-1.5 items-center font-bold text-white text-[18px]" href="{{ action([\App\Http\Controllers\MainController::class, 'index']) }}">Explore <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                <li><a class="font-bold text-white text-[18px] hover:bg-gray-700" href="{{route('home') }}">Home</a></li>
+                <li><a class="flex gap-x-1.5 items-center font-bold text-white text-[18px] hover:bg-gray-700" href="{{route('explore')}}">Explore <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
                             <path d="M4.99997 5.85018C4.82075 5.85018 4.64155 5.78175 4.50492 5.64518L0.205141 1.34536C-0.0683805 1.07184 -0.0683805 0.628372 0.205141 0.354961C0.478553 0.0815495 0.921933 0.0815495 1.19548 0.354961L4.99997 4.15968L8.80449 0.355094C9.07801 0.0816824 9.52135 0.0816824 9.79474 0.355094C10.0684 0.628505 10.0684 1.07197 9.79474 1.3455L5.49503 5.64531C5.35832 5.78191 5.17913 5.85018 4.99997 5.85018Z" fill="white"/>
                         </svg>
                     </a>
@@ -35,10 +35,20 @@
                         </svg>
                     </a>
                 </li>
-                <li><a class="flex gap-x-1.5 items-center font-bold text-white text-[18px]" href="#">Pages<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                <li><a class="flex gap-x-1.5 items-center font-bold text-white text-[18px] hover:bg-gray-700" href="">
+                        Pages
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
                             <path d="M4.99997 5.85018C4.82075 5.85018 4.64155 5.78175 4.50492 5.64518L0.205141 1.34536C-0.0683805 1.07184 -0.0683805 0.628372 0.205141 0.354961C0.478553 0.0815495 0.921933 0.0815495 1.19548 0.354961L4.99997 4.15968L8.80449 0.355094C9.07801 0.0816824 9.52135 0.0816824 9.79474 0.355094C10.0684 0.628505 10.0684 1.07197 9.79474 1.3455L5.49503 5.64531C5.35832 5.78191 5.17913 5.85018 4.99997 5.85018Z" fill="white"/>
                         </svg>
                     </a>
+                    <ul class="absolute ">
+                        <li><a href="{{route('login')}}" class="p-3 text-white  hover:text-amber-300">Login</a> </li>
+                        <li><a href="{{route('register')}}" class="p-3 text-white hover:text-amber-300">Register</a> </li>
+                        <li><a href="{{ action([\App\Http\Controllers\ItemController::class, 'create']) }}" class="p-3 text-white block hover:text-amber-300">Create Item</a> </li>
+                        <li><a href="" class="p-3 text-white block hover:text-amber-300">Author</a> </li>
+                        <li><a href="{{route('explore')}}" class="p-3 text-white block hover:text-amber-300">Explore</a> </li>
+                        <li><a href="" class="p-3 text-white block hover:text-amber-300">Create Collection</a> </li>
+                    </ul>
                 </li>
                 <li><a class="flex gap-x-1.5 items-center font-bold text-white text-[18px]" href="#">Contact <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
                             <path d="M4.99997 5.85018C4.82075 5.85018 4.64155 5.78175 4.50492 5.64518L0.205141 1.34536C-0.0683805 1.07184 -0.0683805 0.628372 0.205141 0.354961C0.478553 0.0815495 0.921933 0.0815495 1.19548 0.354961L4.99997 4.15968L8.80449 0.355094C9.07801 0.0816824 9.52135 0.0816824 9.79474 0.355094C10.0684 0.628505 10.0684 1.07197 9.79474 1.3455L5.49503 5.64531C5.35832 5.78191 5.17913 5.85018 4.99997 5.85018Z" fill="white"/>

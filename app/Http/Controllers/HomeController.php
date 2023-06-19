@@ -61,4 +61,20 @@ class HomeController extends Controller
         return view('home.pages.explore', compact('collections', 'categories', 'items'));
     }
 
+    public function author(User $user, Request $request):View
+    {
+        $categories = Category::all()->take(4);
+
+        $query_items = Item::query()->where('user_id', $user->id);
+
+        //se valida que exista el parametro y que no este vacio
+        if($request->has('category') && $request->input('category') != '') {
+            $query_items->where('category_id', $request->input('category'));
+        }
+
+        $items = $query_items->get();
+
+        return view('home.pages.author', compact('user', 'categories', 'items'));
+    }
+
 }

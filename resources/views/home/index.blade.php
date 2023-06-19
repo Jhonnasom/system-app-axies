@@ -42,7 +42,7 @@
                 <h1 class="text-[56px] font-bold text-white max-w-[525px]">Discover, and collect extraordinary <span class="text-[#E250E5]">Monster</span> NFTs</h1>
                 <p class="text-white text-[20px]">Marketplace for monster character cllections non fungible token NFTs</p>
                 <div class="flex gap-x-4">
-                    <a href="{{ action([\App\Http\Controllers\MainController::class, 'index']) }}" class="flex gap-x-2 px-[37px] py-[17px] text-white font-bold border-[1px] border-[#5142FC] rounded-[30px]">
+                    <a href="{{route('explore')}}" class="flex gap-x-2 px-[37px] py-[17px] text-white font-bold border-[1px] border-[#5142FC] rounded-[30px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                             <path d="M12.5018 16.208L13.7719 14.0081C16.6056 9.09999 16.241 4.93672 15.9644 3.41039C15.9351 3.24485 15.8342 3.10183 15.6899 3.01705C15.5447 2.93251 15.3707 2.916 15.2117 2.97134C13.7383 3.48437 9.90813 5.22727 7.07185 10.1398L5.80142 12.3403L5.23711 12.3794C4.14896 12.4556 3.16906 13.0678 2.6233 14.0131L1.10734 16.6388C1.01756 16.7943 1.02037 16.9876 1.11469 17.1409C1.20988 17.294 1.38135 17.3818 1.56086 17.3695L3.38816 17.2526C3.90103 17.2202 4.41204 17.3391 4.85737 17.5962L5.82773 18.1565L5.09308 19.4289C4.95793 19.663 5.03802 19.9619 5.27155 20.0968L6.04851 20.5453C6.28205 20.6802 6.58096 20.6001 6.71611 20.366L7.45076 19.0935L8.42057 19.6535C8.8659 19.9106 9.22557 20.2929 9.45358 20.7552L10.2651 22.395C10.3443 22.5566 10.5061 22.6611 10.6862 22.6671C10.8661 22.6721 11.035 22.5779 11.1248 22.4223L12.6407 19.7966C13.1858 18.8525 13.2255 17.6974 12.7486 16.7162L12.5018 16.208ZM11.142 10.8273C10.336 10.362 10.0592 9.33044 10.5245 8.5245C10.9901 7.718 12.0216 7.44256 12.8275 7.90787C13.6329 8.37286 13.9101 9.40387 13.4445 10.2104C12.9792 11.0163 11.9474 11.2923 11.142 10.8273Z" fill="white"/>
                         </svg>
@@ -110,7 +110,7 @@
     <section class="px-[255px] py-[80px] bg-[#14141f] flex flex-col gap-y-[38px]">
         <div class="flex justify-between items-center">
             <h1 class="text-white text-[36px] font-bold">Popular Collection</h1>
-            <a href="/home/explore" class="text-white font-bold uppercase border-b-[1px] border-[#E250E5] text-[14px]">Explore More</a>
+            <a href="{{route('explore')}}" class="text-white font-bold uppercase border-b-[1px] border-[#E250E5] text-[14px]">Explore More</a>
         </div>
         <div class="flex items-center gap-x-[30px]">
             @foreach($collections as $collection)
@@ -150,7 +150,9 @@
         <h1 class="text-white text-[36px] font-bold">Top Sellers</h1>
         <div class="grid grid-cols-5 gap-y-7 gap-x-[68px]">
             @foreach($users as $user)
-                <x-top-seller url_img="{{$user->getFirstMediaUrl('profile')}}" name="{{$user->name}}"></x-top-seller>
+                <div class="hover:cursor-pointer" onclick="showAuthor({{$user->id}});">
+                    <x-top-seller url_img="{{$user->getFirstMediaUrl('profile')}}" name="{{$user->name}}"></x-top-seller>
+                </div>
             @endforeach
         </div>
     </section>
@@ -177,6 +179,9 @@
         <script>
             function showItem(id) {
                 window.location = '/items/' + id;
+            }
+            function showAuthor(id) {
+                window.location = '/home/author/' + id;
             }
         </script>
     @endpush

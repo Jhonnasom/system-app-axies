@@ -31,7 +31,8 @@ Route::get('/showitem', function () {
 
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
-Route::get('/home/explore', [HomeController::class, 'explore'])->middleware(['auth', 'verified']);
+Route::get('/home/explore', [HomeController::class, 'explore'])->middleware(['auth', 'verified'])->name('explore');
+Route::get('/home/author/{user}', [HomeController::class, 'author'])->middleware(['auth', 'verified'])->name('author');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
