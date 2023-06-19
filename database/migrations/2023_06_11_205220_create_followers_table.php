@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('followed-follower', function (Blueprint $table) {
+        Schema::create('followers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('follower_id')->references('id')->on('users');
-            $table->foreignId('followed_id')->references('id')->on('users');
+            $table->foreignId('follower_id')->constrained('users');
+            $table->foreignId('followed_id')->constrained('users');
             $table->timestamps();
+
+            $table->unique(['follower_id', 'followed_id']);
         });
     }
 
