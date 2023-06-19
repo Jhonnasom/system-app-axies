@@ -24,31 +24,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/showitem', function () {
-    return view('items.show');
-});
-
-
-
-Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
-Route::get('/home/explore', [HomeController::class, 'explore'])->middleware(['auth', 'verified'])->name('explore');
-Route::get('/home/author/{user}', [HomeController::class, 'author'])->middleware(['auth', 'verified'])->name('author');
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/image', [ProfileController::class, 'update_image'])->name('profile.update_image');
+
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home/explore', [HomeController::class, 'explore'])->name('explore');
+    Route::get('/home/author/{user}', [HomeController::class, 'author'])->name('author');
+
+    Route::resource('main', MainController::class);
+
+    Route::resource('categories', CategoryController::class);
+
+    Route::resource('collections', CollectionController::class);
+
+    Route::resource('items', ItemController::class);
+
+    Route::resource('users', UserController::class);
+
 });
-
-Route::resource('main', MainController::class);
-
-Route::resource('categories', CategoryController::class);
-
-Route::resource('collections', CollectionController::class);
-
-Route::resource('items', ItemController::class);
-
-Route::resource('users', UserController::class);
 
 require __DIR__.'/auth.php';
