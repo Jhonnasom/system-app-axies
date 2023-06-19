@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ItemsLiked;
 use App\Models\Category;
 use App\Models\Collection;
 use App\Models\Item;
+use App\Models\Like;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -94,5 +96,20 @@ class ItemController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function like_item(Item $item) {
+        $like = Like::where('user_id', Auth()->user()->id)->where('likeable_id', $item->id)->first();
+        if ($like) {
+            $like->delete();
+        } else {
+            $like = new Like([
+                'user_id' => Auth()->user()->id,
+                'likeable_id' => $item->id,
+            ]);
+            $item->likes()->save($like);
+        }
+        event(new ItemsLiked($item->id, $item->likes()->count()));
+        return ['likes' => $item->likes()->count()];
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CollectionsLiked;
 use App\Models\Collection;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -71,5 +73,20 @@ class CollectionController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function like_collection(Collection $collection) {
+        $like = Like::where('user_id', Auth()->user()->id)->where('likeable_id', $collection->id)->first();
+        if ($like) {
+            $like->delete();
+        } else {
+            $like = new Like([
+                'user_id' => Auth()->user()->id,
+                'likeable_id' => $collection->id,
+            ]);
+            $collection->likes()->save($like);
+        }
+        event(new CollectionsLiked($collection->id, $collection->likes()->count()));
+        return ['likes' => $collection->likes()->count()];
     }
 }

@@ -41,8 +41,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('collections', CollectionController::class);
+    Route::post('/collections/{collection}/like', [CollectionController::class, 'like_collection']);
 
     Route::resource('items', ItemController::class);
+    Route::post('/items/{item}/like', [ItemController::class, 'like_item']);
 
     Route::resource('users', UserController::class);
 

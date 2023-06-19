@@ -154,7 +154,34 @@
 </footer>
 </body>
 @stack('scripts')
+<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('207f9cd3be05f0a2116f', {
+        cluster: 'us2'
+    });
+
+    var channel = pusher.subscribe('channel-liked');
+    channel.bind('items-liked', function(data) {
+        let id = data.id;
+        let likes = data.likes;
+        const counter_items_likes = document.getElementById(`counter_item_likes_id_${id}`);
+        if (counter_items_likes !== null && counter_items_likes !== undefined) {
+            counter_items_likes.innerText = likes;
+        }
+    });
+    channel.bind('collections-liked', function(data) {
+        let id = data.id;
+        let likes = data.likes;
+        const counter_collection_likes = document.getElementById(`counter_collection_likes_id_${id}`);
+        if (counter_collection_likes !== null && counter_collection_likes !== undefined) {
+            counter_collection_likes.innerText = likes;
+        }
+    });
+
     const title = document.getElementById("title");
     const titleShow = document.getElementById("titleShow");
     if (title !== null && title !== undefined) {
