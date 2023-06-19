@@ -151,7 +151,8 @@
         <div class="grid grid-cols-5 gap-y-7 gap-x-[68px]">
             @foreach($users as $user)
                 <div class="hover:cursor-pointer" onclick="showAuthor({{$user->id}});">
-                    <x-top-seller url_img="{{$user->getFirstMediaUrl('profile')}}" name="{{$user->name}}"></x-top-seller>
+                    <x-top-seller url_img="{{$user->getFirstMediaUrl('profile')}}" name="{{$user->name}}"
+                    total="{{$user->followers()->count()}}"></x-top-seller>
                 </div>
             @endforeach
         </div>
