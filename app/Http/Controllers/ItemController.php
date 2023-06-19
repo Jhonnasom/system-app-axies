@@ -99,7 +99,9 @@ class ItemController extends Controller
     }
 
     public function like_item(Item $item) {
-        $like = Like::where('user_id', Auth()->user()->id)->where('likeable_id', $item->id)->first();
+        $like = Like::where('user_id', Auth()->user()->id)
+            ->where('likeable_type', Item::class)
+            ->where('likeable_id', $item->id)->first();
         if ($like) {
             $like->delete();
         } else {

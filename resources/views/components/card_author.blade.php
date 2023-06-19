@@ -1,4 +1,6 @@
 @props(['item_title' => '',
+'item_id' => 0,
+'likes' => 0,
 'user_name' => '',
 'price' => '0.00',
 'user_image' => '',
@@ -6,11 +8,13 @@
 <div class="group w-[330px] h-[442px] bg-[#343444] p-5 rounded-[20px]">
     {{--                        Div secondary gray--}}
     <div class="relative w-[290px] h-[290px] bg-[#7A798A] rounded-[20px] flex flex-col">
-        <img src="{{$item_image}}" class="absolute w-[290px] h-[290px] rounded-[20px]">
+        <div onclick="showItem({{$item_id}})" class="hover:cursor-pointer">
+            <img src="{{$item_image}}" class="absolute w-[290px] h-[290px] rounded-[20px]">
+        </div>
         <div class="h-[28px] flex justify-end z-10 mt-3 mr-3">
             <div class="bg-[#14141F] rounded-[10px] w-[64px] h-[28px] flex justify-center items-center flex gap-[5px] ">
                 <x-heart></x-heart>
-                <label class="text-white">100</label>
+                <label id="counter_item_likes_id_{{$item_id}}" class="text-white">{{$likes}}</label>
             </div>
         </div>
         <div class="h-[262px] flex items-center justify-center z-10">

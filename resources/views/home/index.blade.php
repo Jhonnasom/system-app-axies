@@ -164,7 +164,7 @@
                 <x-card home="yes" item_name="{{$item->title}}" author="{{$item->user->name}}" authorP="Creator"
                         priceP="Price" price="{{$item->price}}"
                         author_image="{{$item->user->getFirstMediaUrl('profile')}}"
-                        item_id="{{$item->id}}">
+                        item_id="{{$item->id}}" likes="{{$item->likes()->count()}}">
                     <x-slot name="pictureShow">
                         <img id="pictureShow" src="{{$item->getFirstMediaUrl('image_items')}}" alt="" class="w-full h-full">
                     </x-slot>

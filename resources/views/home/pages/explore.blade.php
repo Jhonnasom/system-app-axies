@@ -44,19 +44,18 @@
         <div class="flex flex-col">
             <section class="grid grid-cols-3 gap-x-[38px] gap-y-11">
                 @foreach($items as $item)
-                    <div onclick="showItem({{$item->id}})" class="hover:cursor-pointer">
-                        <x-card :isBuyeable="false" home="yes" :buttons="false"
-                                author="{{$item->user->name}}"
-                                authorP="Creator"
-                                item_name="{{$item->title}}"
-                                price="{{$item->price}}"
-                                priceP="Price"
-                                author_image="{{$item->user->getFirstMediaUrl('profile')}}">
-                            <x-slot name="pictureShow">
-                                <img id="pictureShow" src="{{$item->getFirstMediaUrl('image_items')}}" alt="" class="w-full h-full">
-                            </x-slot>
-                        </x-card>
-                    </div>
+                    <x-card :isBuyeable="false" home="yes" :buttons="false"
+                            author="{{$item->user->name}}"
+                            authorP="Creator"
+                            item_name="{{$item->title}}"
+                            price="{{$item->price}}"
+                            priceP="Price"
+                            author_image="{{$item->user->getFirstMediaUrl('profile')}}"
+                            item_id="{{$item->id}}" likes="{{$item->likes()->count()}}">
+                        <x-slot name="pictureShow">
+                            <img id="pictureShow" src="{{$item->getFirstMediaUrl('image_items')}}" alt="" class="w-full h-full">
+                        </x-slot>
+                    </x-card>
                 @endforeach
             </section>
             <button id="bntLoadMoreOrLess" class="col-start-2 mt-6 place-self-center px-[30px] flex justify-center items-center py-4 border-[#FFFFFF] border-[1.5px] font-bold text-[15px] text-white rounded-[56px]" onclick="LoadMoreOrLess()">
@@ -66,6 +65,7 @@
     </main>
     @push('scripts')
         <script>
+            window.CSRF_TOKEN = '{{ csrf_token() }}';
             //Se ejecuta cuando se carga la pagina
             const drops = document.querySelectorAll('.drop');
 
@@ -178,6 +178,15 @@
 
                 //Se redirecciona a la pagina con los parametros de filtrado
                 window.location = "/home/explore?categories="+categoriesCheckbox+"&collections="+collectionsCheckbox+"&limit=" + limit;
+            }
+
+            function likeItem(id) {
+                fetch('/items/'+ id +'/like', {
+                    headers: {
+                        'X-CSRF-TOKEN': window.CSRF_TOKEN
+                    },
+                    'method': 'POST',
+                }).then(response => response.json()).then(data => console.log(data));
             }
         </script>
     @endpush

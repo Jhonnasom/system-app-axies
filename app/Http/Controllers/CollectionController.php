@@ -76,7 +76,9 @@ class CollectionController extends Controller
     }
 
     public function like_collection(Collection $collection) {
-        $like = Like::where('user_id', Auth()->user()->id)->where('likeable_id', $collection->id)->first();
+        $like = Like::where('user_id', Auth()->user()->id)
+            ->where('likeable_type', Collection::class)
+            ->where('likeable_id', $collection->id)->first();
         if ($like) {
             $like->delete();
         } else {
