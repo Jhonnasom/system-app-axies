@@ -77,4 +77,14 @@ class HomeController extends Controller
         return view('home.pages.author', compact('user', 'categories', 'items'));
     }
 
+    public function follow_author(User $user) {
+        Auth()->user()->following()->attach($user->id);
+        return redirect()->back();
+    }
+
+    public function unfollow_author(User $user) {
+        Auth()->user()->following()->detach($user->id);
+        return redirect()->back();
+    }
+
 }

@@ -33,6 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/home/explore', [HomeController::class, 'explore'])->name('explore');
     Route::get('/home/author/{user}', [HomeController::class, 'author'])->name('author');
+    Route::get('/home/author/{user}/follow', [HomeController::class, 'follow_author']);
+    Route::get('/home/author/{user}/unfollow', [HomeController::class, 'unfollow_author']);
 
     Route::resource('main', MainController::class);
 
